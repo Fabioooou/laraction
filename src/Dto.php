@@ -6,10 +6,9 @@ namespace Laraction;
 abstract class Dto
 {
 
-  public static function input(array $input): ?Self
+  public function toArray()
   {
-    $class = new \ReflectionClass(get_class());
-    return  $class->newInstanceArgs($input);
+    return get_object_vars($this);
   }
 
 }

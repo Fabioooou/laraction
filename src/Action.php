@@ -10,7 +10,7 @@ abstract class Action
 
 	protected function dto($dto)
 	{
-		$this->dto =   call_user_func(get_class() . 'Dto'. '::input', $dto);
+		$this->dto =   call_user_func(get_class($this) . 'Dto'. '::input', $dto);
 
 		return $this;
 	}
