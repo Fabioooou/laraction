@@ -179,9 +179,11 @@ class SchemaLaractionActionCreate implements SchemaStub
 
 	function getBusinessOperationDeleteCode()
 	{
+		$primaryKeyName = (!empty($this->getPrimaryColumn())) ? $this->getPrimaryColumn()->getName() : 'id';
+
 		$data  = '';
 		$data .= PHP_EOL;
-		$data .= '$'.strtolower($this->config->getEntity()). ' =  '. $this->config->getEntity() . '::where("'.$this->getPrimaryColumn()->getName().'", $this->dto()->'.$this->getPrimaryColumn()->getName().')->first();';
+		$data .= '$'.strtolower($this->config->getEntity()). ' =  '. $this->config->getEntity() . '::where("'.$primaryKeyName.'", $this->dto()->'.$primaryKeyName.')->first();';
 		$data .= PHP_EOL;
 		$data .= PHP_EOL;
 
@@ -202,9 +204,11 @@ class SchemaLaractionActionCreate implements SchemaStub
 
 	function getBusinessOperationFindCode()
 	{
+		$primaryKeyName = (!empty($this->getPrimaryColumn())) ? $this->getPrimaryColumn()->getName() : 'id';
+
 		$data  = '';
 		$data .= PHP_EOL;
-		$data .= '$'.strtolower($this->config->getEntity()). ' =  '. $this->config->getEntity() . '::where("'.$this->getPrimaryColumn()->getName().'", $this->dto()->'.$this->getPrimaryColumn()->getName().')->first();';
+		$data .= '$'.strtolower($this->config->getEntity()). ' =  '. $this->config->getEntity() . '::where("'.$primaryKeyName.'", $this->dto()->'.$primaryKeyName.')->first();';
 		$data .= PHP_EOL;
 		$data .= PHP_EOL;
 
@@ -253,9 +257,11 @@ class SchemaLaractionActionCreate implements SchemaStub
 
 	function getBusinessOperationSaveCode()
 	{
+		$primaryKeyName = (!empty($this->getPrimaryColumn())) ? $this->getPrimaryColumn()->getName() : 'id';
+		
 		$data  = '';
 		$data .= PHP_EOL;
-		$data .= '$'.strtolower($this->config->getEntity()). ' =  '. $this->config->getEntity() . '::where("'.$this->getPrimaryColumn()->getName().'", $this->dto()->'.$this->getPrimaryColumn()->getName().')->first();';
+		$data .= '$'.strtolower($this->config->getEntity()). ' =  '. $this->config->getEntity() . '::where("'.$primaryKeyName.'", $this->dto()->'.$primaryKeyName.')->first();';
 		$data .= PHP_EOL;
 		$data .= PHP_EOL;
 
