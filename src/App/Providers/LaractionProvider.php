@@ -15,7 +15,7 @@ class LaractionProvider extends ServiceProvider
      */
     public function register()
     {
-        $src = dirname(__DIR__,2);
+        $src = dirname(__DIR__,2) . DIRECTORY_SEPARATOR;
 
         $this->commands([
             LaractionInstall::class,
@@ -33,7 +33,7 @@ class LaractionProvider extends ServiceProvider
     public function boot()
     {
 
-        $src = dirname(__DIR__,2);
+        $src = dirname(__DIR__,2) . DIRECTORY_SEPARATOR;
 
 
         $this->publishes([
