@@ -64,12 +64,7 @@ class LaractionProvider extends ServiceProvider
              $src .'stubs/laraction/validation.stub' => base_path('stubs/laraction/validation.stub'),
          ], 'stubs');
 
-
-
-
-        
-        //$this->loadViewsFrom(dirname(__DIR__,2).'/views', 'laraction'); 
-
+        $this->loadViewsFrom($src . 'views', 'laraction'); 
 
     }
 }
