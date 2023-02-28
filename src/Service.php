@@ -1,19 +1,15 @@
 <?php
 
-
 namespace Laraction;
-
 
 class Service 
 {
 
-	static function find($id) 
-	{
+	static function find($id) {
 		return self::model()::find($id);
 	}
 
-	static private function model()
-	{
+	static private function model() {
 		return static::$model;
 	}
 

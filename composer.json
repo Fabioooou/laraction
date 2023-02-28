@@ -6,7 +6,9 @@
             "email": "fabio@avantesoftware.com.br"
         }
     ],
-    "require": {},
+    "require": {
+        "doctrine/dbal": "3.5.3"
+    },
     "autoload": {
         "psr-4": {
             "Laraction\\": "src"

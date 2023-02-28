@@ -8,11 +8,9 @@ use Laraction\Dto\DtoInterface;
 abstract class Dto implements DtoInterface
 {
 
-  public function toArray()
-  {
-    return get_object_vars($this);
-  }
-
+	public function toArray(){
+		return get_object_vars($this);
+	}
 
 	public function __set($property, $value)
 	{
