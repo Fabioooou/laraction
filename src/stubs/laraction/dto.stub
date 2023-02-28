@@ -1,0 +1,20 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Dto;
+use Laraction\Dto\HasInput;
+use Laraction\Dto\HasValidation;
+
+class {{class}}Dto extends Dto
+{
+
+  use HasInput, HasValidation;
+
+  public function __construct(
+    {{fields}}
+  ){
+    //
+  }
+
+}

@@ -13,5 +13,12 @@
         "psr-4": {
             "Laraction\\": "src"
         }
+    },
+     "extra": {
+        "laravel": {
+            "providers": [
+                "Laraction\\App\\Providers\\LaractionProvider"
+            ]
+        }
     }
 }

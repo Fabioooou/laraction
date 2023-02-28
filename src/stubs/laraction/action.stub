@@ -1,0 +1,24 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Action;
+use Laraction\Action\HasDto;
+{{businessOperationUses}}
+
+class {{class}} extends Action
+{
+
+  use HasDto;
+
+  public function __construct(array $inputs)
+  {
+    $this->createDto($inputs, {{class}}Dto::class)->validate();
+  }
+
+  public function run(): {{businessOperationType}}
+  {
+{{businessOperationScript}}
+  }
+
+}

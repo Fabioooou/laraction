@@ -1,0 +1,1 @@
+Route::any('{{route}}', '{{controller}}@{{action}}')->name('{{routename}}');

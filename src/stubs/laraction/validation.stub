@@ -1,0 +1,20 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Validation;
+
+class {{class}}Validation extends Validation
+{
+
+  static function rules()
+  {
+    return [{{rules}}];
+  }
+
+  static function messages()
+  {
+    return [{{messages}}];
+  }
+
+}
