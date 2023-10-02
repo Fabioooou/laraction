@@ -44,6 +44,10 @@ class LaractionProvider extends ServiceProvider
              $src .'stubs/laraction/action.stub' => base_path('stubs/laraction/action.stub'),
          ], 'stubs');
 
+         $this->publishes([
+            $src .'stubs/laraction/action_simple.stub' => base_path('stubs/laraction/action_simple.stub'),
+        ], 'stubs');
+
         $this->publishes([
              $src .'stubs/laraction/dto.stub' => base_path('stubs/laraction/dto.stub'),
          ], 'stubs');
@@ -64,7 +68,67 @@ class LaractionProvider extends ServiceProvider
              $src .'stubs/laraction/validation.stub' => base_path('stubs/laraction/validation.stub'),
          ], 'stubs');
 
-        $this->loadViewsFrom($src . 'views', 'laraction'); 
+        $this->publishes([
+            $src .'stubs/laraction/create_form.stub' => base_path('stubs/laraction/create_form.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/paginate.stub' => base_path('stubs/laraction/paginate.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/layout.stub' => base_path('stubs/laraction/layout.stub'),
+        ], 'stubs');
+
+
+         # form stubs
+        $this->publishes([
+            $src .'stubs/laraction/form/input_text.stub' => base_path('stubs/laraction/form/input_text.stub'),
+        ], 'stubs');
+
+        # operation stubs
+        $this->publishes([
+            $src .'stubs/laraction/operation/action_create_form.stub' => base_path('stubs/laraction/operation/action_create_form.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/action_create.stub' => base_path('stubs/laraction/operation/action_create.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/action_delete.stub' => base_path('stubs/laraction/operation/action_delete.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/action_paginate.stub' => base_path('stubs/laraction/operation/action_paginate.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/action_save_form.stub' => base_path('stubs/laraction/operation/action_save_form.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/action_save.stub' => base_path('stubs/laraction/operation/action_save.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/view_create.stub' => base_path('stubs/laraction/operation/view_create.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/view_delete.stub' => base_path('stubs/laraction/operation/view_delete.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/view_save_form.stub' => base_path('stubs/laraction/operation/view_save_form.stub'),
+        ], 'stubs');
+
+        $this->publishes([
+            $src .'stubs/laraction/operation/view_save.stub' => base_path('stubs/laraction/operation/view_save.stub'),
+        ], 'stubs');
+
+        # views
+        $this->loadViewsFrom($src . 'views', 'laraction');
 
     }
 }

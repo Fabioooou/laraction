@@ -1,0 +1,37 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Action;
+use Laraction\Exceptions\BusinessException;
+
+/**
+ *  {{class}}
+ * ------
+ *
+ *  @description delete {{model}} entity
+ *
+ **/
+class {{class}} extends Action
+{
+
+    /**
+     * run
+     * ----
+     *
+     **/
+    public function run()
+    {
+        return $this->delete();
+    }
+
+    /**
+     * delete
+     * -----
+     **/
+    protected function delete()
+    {
+{{scriptDelete}}
+    }
+
+}

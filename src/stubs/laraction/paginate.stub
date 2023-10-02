@@ -1,0 +1,19 @@
+@extends('layouts.{{layoutName}}')
+
+@section('content')
+
+    <h2>{{paginateTitle}}</h2>
+
+    <table class="table">
+        @foreach(${{paginateList}} as ${{paginateItem}})
+            <tr>
+                <td>{!! ${{paginateItem}}->id !!}</td>
+                <td>{!! ${{paginateItem}}->created_at !!}</td>
+                <td>..</td>
+            </tr>
+        @endforeach
+    </table>
+
+    {!! ${{paginateList}}->links(); !!}
+
+@endsection

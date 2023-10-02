@@ -5,7 +5,7 @@ namespace Laraction\App\Actions\Manager\Config;
 use Illuminate\Support\Str;
 use Laraction\App\Traits\ToArray;
 
-class ConfigLaractionCreate 
+class ConfigLaractionCreate
 {
 	use ToArray;
 
@@ -48,7 +48,7 @@ class ConfigLaractionCreate
 
 	public function run()
 	{
-		return $this->toArray(); 
+		return $this->toArray();
 	}
 
 
@@ -71,7 +71,7 @@ class ConfigLaractionCreate
 			'middlewares' => ['web'],
 		];
 	}
-	
+
 
 
 	public function getRouteArray() : array
@@ -81,7 +81,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of entity
-	 */ 
+	 */
 	public function getEntity() : string
 	{
 		return $this->entity;
@@ -89,7 +89,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of table
-	 */ 
+	 */
 	public function getTable() : string
 	{
 		return $this->table;
@@ -97,7 +97,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of dir
-	 */ 
+	 */
 	public function getDir() : string
 	{
 		return $this->dir;
@@ -105,7 +105,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of domain
-	 */ 
+	 */
 	public function getDomain() : string
 	{
 		return $this->domain;
@@ -113,7 +113,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of subsystem
-	 */ 
+	 */
 	public function getSubsystem() : string
 	{
 		return $this->subsystem;
@@ -121,7 +121,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of route
-	 */ 
+	 */
 	public function getRoute() : string
 	{
 		return $this->route;
@@ -129,7 +129,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of theme
-	 */ 
+	 */
 	public function getTheme()
 	{
 		return $this->theme;
@@ -137,7 +137,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of namespace_base
-	 */ 
+	 */
 	public function getNamespaceBase()
 	{
 		return $this->namespace_base;
@@ -147,7 +147,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of path_base
-	 */ 
+	 */
 	public function getPathBase()
 	{
 		return $this->path_base;
@@ -155,7 +155,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of path_base
-	 */ 
+	 */
 	public function getPathStubs()
 	{
 		return $this->path_stubs;
@@ -163,7 +163,7 @@ class ConfigLaractionCreate
 
 	/**
 	 * Get the value of path_base
-	 */ 
+	 */
 	public function getStubPath()
 	{
 		return $this->path_stubs;
@@ -182,4 +182,17 @@ class ConfigLaractionCreate
 		}
 		return $capitalized;
 	}
+
+    function getActionDirectory(): string
+    {
+        return $this->getPathBase() .
+            DIRECTORY_SEPARATOR .
+            implode(DIRECTORY_SEPARATOR, $this->getCapitalizePath()) .
+            DIRECTORY_SEPARATOR;
+    }
+
+    function getStubDirectory(): string
+    {
+        return $this->getStubPath();
+    }
 }

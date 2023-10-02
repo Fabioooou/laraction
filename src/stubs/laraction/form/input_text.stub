@@ -1,0 +1,6 @@
+<div class="form-group">
+    <div class="form-control-wrap">
+        <input name="{{name}}" type="text" class="form-control form-control-outlined" id="{{id}}" placeholder="{{placeholder}}" value="{{value}}" {{required}} />
+        <label class="form-label-outlined" for="outlined">{{label}}</label>
+    </div>
+</div>

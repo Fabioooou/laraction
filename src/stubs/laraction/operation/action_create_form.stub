@@ -1,0 +1,21 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Action;
+
+/**
+ *  {{class}}
+ * ------
+ *
+ **/
+class {{class}} extends Action
+{
+
+    public function run(): void
+    {
+        //
+    }
+
+
+}

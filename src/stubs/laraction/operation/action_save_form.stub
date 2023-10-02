@@ -1,0 +1,45 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Action;
+use Laraction\Exceptions\BusinessException;
+
+/**
+ *  {{class}}
+ * ------
+ *
+ *  @description find {{model}} to send save form
+ *
+ **/
+class {{class}} extends Action
+{
+    protected ?{{model}} ${{entity}};
+
+    /**
+     * run
+     * ----
+     * @return {{model}}
+     **/
+    public function run(): ?{{model}}
+    {
+        return $this->find();
+    }
+
+
+    /**
+     * find
+     * -----
+     **/
+    protected function find(): ?{{model}}
+    {
+        if(!$this->request()->id){
+            throw new BusinessException('Parameter id not found');
+        }
+
+        $this->{{entity}} = {{model}}::find($this->request()->id);
+
+        return $this->{{entity}};
+    }
+
+}

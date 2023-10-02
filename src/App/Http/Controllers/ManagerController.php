@@ -17,7 +17,7 @@ class ManagerController extends BaseController
 	 * Manager - Home
 	 *
 	 * @return void
-	 */  
+	 */
 	public function index()
 	{
 		$tables = (new SchemaTableList)->run();
@@ -32,7 +32,7 @@ class ManagerController extends BaseController
 	 */
 	public function edit($route)
 	{
-			$config = (new ConfigLaractionCreate($route))->run(); 
+			$config = (new ConfigLaractionCreate($route));
 
 			$laraction = Laraction::find($route);
 
@@ -42,6 +42,8 @@ class ManagerController extends BaseController
 			}else{
 				$actions 	 = ['Create', 'Update', 'List'];
 			}
+
+            //dd($config->getCapitalizePath());
 
 			return view('laraction::step2', compact('config', 'actions'));
 
@@ -119,19 +121,27 @@ class ManagerController extends BaseController
 	 */
 	public function action($route, $action = null)
 	{
-		$config = (new ConfigLaractionCreate($route))->run(); 
+        // config
+		$config = new ConfigLaractionCreate($route);
+
+        // laraction
 		$laraction = Laraction::find($route);
+        $laraction = ($laraction and $laraction->action($action)) ? $laraction  : null;
 
-		$columns = ($laraction) ? $laraction->columns($action) : null;	
+        // if laraction, then.. columns laraction editable
+		$columns = ($laraction) ? $laraction->columns($action) : null;
 		$editable = ($laraction);
-		
-		if(!$columns){
-			$columns = (new SchemaColumnList($config['table']))->run() ;
-		}
 
-		$action 	 = ($action) ? $action : 'NewAction-'.rand(0000001, 9999999999);
+        $laraction = ($laraction) ? $laraction->action($action) : null;
 
-		return (string) view('laraction::partials.action', compact('action', 'config', 'columns', 'editable'));
+        // if not laraction, then.. columns db
+        $columns = (!$columns) ? (new SchemaColumnList($config->getTable()))->run() : $columns;
+
+		$action  = ($action) ? $action : 'NewAction-'.rand(0000001, 9999999999);
+
+        $operations = config('laraction.operations');
+
+		return (string) view('laraction::partials.action', compact('action', 'config', 'columns', 'editable', 'laraction', 'operations'));
 	}
 
 
@@ -140,6 +150,6 @@ class ManagerController extends BaseController
 
 
 
-	
+
 
 }

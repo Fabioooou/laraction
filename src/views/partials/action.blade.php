@@ -10,37 +10,39 @@ $validation = function($col)
   ($col['notnull']) ? array_push($validate, 'required') : array_push($validate, 'nullable');
   ($col['name'] == 'email') ? array_push($validate,'email') : '';
   ($col['type'] == 'string' and $col['length'] > 0) ? array_push($validate, 'string' , 'min:1' ,'max:'.$col['length']) : '';
-  ($col['type'] == 'boolean') ? array_push($validate, 'boolean') : '';  
-  ($col['type'] == 'integer' and $col['precision']) ? array_push($validate, 'numeric', 'digits_between:'.$col['scale'].','.$col['precision']) : '';   
+  ($col['type'] == 'boolean') ? array_push($validate, 'boolean') : '';
+  ($col['type'] == 'integer' and $col['precision']) ? array_push($validate, 'numeric', 'digits_between:'.$col['scale'].','.$col['precision']) : '';
   return implode('|', $validate);
 
 }
 @endphp
 @php
-  
+
   if(!empty($col['name'])){
     //$action = $col['name'];
   }
 
 @endphp
-<div class="col-md-12 action-col"> 
+<div class="col-md-12 action-col">
   <div class="action-item">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <div class="input-group-text action-name-icon">
-          <span class="action-name-method action-get">get</span>
-          
+          <span class="action-name-method action-{{$laraction['request']['method'] ?? 'get'}}">{{$laraction['request']['method'] ?? 'get'}}</span>
+
         </div>
       </div>
       <div class="input-group-prepend">
         <div class="input-group-text">
-        {{$config['entity']}}
+        {{$config->getEntity()}}
         </div>
       </div>
-      
+
       <input name="actions[{{$action}}][name]" type="text" class="form-control action-name" value="{{$action}}">
       <div class="input-group-append action-item-http" data-open="0">
-        <span class="input-group-text"><i class="las la-plug"></i></span>
+        <span class="input-group-text">
+            {{$laraction['app']['type'] ?? 'mono'}}
+        </span>
       </div>
       <div class="input-group-append action-item-open-close" data-open="0">
         <span class="input-group-text"><i class="las la-database"></i></span>
@@ -49,38 +51,72 @@ $validation = function($col)
         <span class="input-group-text"><i class="las la-trash"></i></span>
       </div>
     </div>
-    
+
     <div class="action-details">
+
+        <div class="use-case-box">
+            <div class="row">
+                <div class="col-md-12">
+                <h5>Use Case</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Description</label>
+                    <input type="text" name="actions[{{$action}}][description]" class="form-control action-description" value="{{$laraction['description'] ?? ''}}" />
+                </div>
+
+                <div class="col-md-3">
+                    <label>Operation</label>
+                    <select name="actions[{{$action}}][business][operation]" class="form-control  operation-method">
+                        @foreach($operations as $key => $operation)
+                        <option {{($editable and $laraction['business']['operation'] == $key) ? 'selected' : ''}} value="{{$key}}">{{$operation['name']}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+
+            </div>
+        </div>
+
 
       <div class="request">
         <div class="row">
           <div class="col-md-12">
-            <h5>Request</h5>
+            <h5>Application layer</h5>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-5">
-            <label>Use Case (Description - Swagger)</label>
-            <input type="text" name="actions[{{$action}}][description]" class="form-control action-description" />
-          </div>
-
           <div class="col-md-2">
             <label>Method</label>
             <select name="actions[{{$action}}][request][method]" class="form-control action-method">
-              <option value="get">GET</option>
-              <option value="post">POST</option>
-              <option value="put">PUT</option>
-              <option value="delete">DELETE</option>
-            </select>
-          </div>
-          <div class="col-md-1">
-            <label>Auth ?</label>
-            <select name="actions[{{$action}}][request][auth_type]" class="form-control">
-              <option value="no">No</option>
-              <option value="bearer">Bearer</option>
+              <option {{($editable and $laraction['request']['method'] == 'get') ? 'selected' : ''}} value="get">GET</option>
+              <option {{($editable and $laraction['request']['method'] == 'post') ? 'selected' : ''}}  value="post">POST</option>
+              <option {{($editable and $laraction['request']['method'] == 'put') ? 'selected' : ''}}  value="put">PUT</option>
+              <option {{($editable and $laraction['request']['method'] == 'delete') ? 'selected' : ''}}  value="delete">DELETE</option>
             </select>
           </div>
           <div class="col-md-2">
+            <label>Route Params:</label>
+            <input type="text" name="actions[{{$action}}][request][route_params]" class="form-control route-params" value="{{ (!empty($laraction['request']['route_params'])) ? $laraction['request']['route_params'] : '' }}" />
+          </div>
+
+          <div class="col-md-2">
+            <label>Application Type</label>
+            <select name="actions[{{$action}}][app][type]" class="form-control action-apptype">
+              <option {{($editable and $laraction['app']['type'] == 'mono') ? 'selected' : ''}}  value="mono">Monolithic (view)</option>
+              <option {{($editable and $laraction['app']['type'] == 'api') ? 'selected' : ''}} value="api">API - REST (json)</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-2">
+            <label>Layout</label>
+            <input type="text" name="actions[{{$action}}][view][layout_name]" class="form-control" value="{{ (!empty($laraction['view']['layout_name'])) ? $laraction['view']['layout_name'] : strtolower($config->getSubSystem()) }}" />
+          </div>
+
+          <!--
+          <div class="col-md-1">
             <label>Body</label>
             <select name="actions[{{$action}}][request][body]" class="form-control">
               <option value="form-data">Multipart Form</option>
@@ -90,11 +126,17 @@ $validation = function($col)
             <label>Middlewares</label>
             <input type="text" name="actions[{{$action}}][request][middlewares]" class="form-control" />
           </div>
+        -->
+
         </div>
       </div>
       <br />
-     
-
+      <div class="row">
+        <div class="col-md-12">
+            <h5>Entity Fields</h5>
+        </div>
+      </div>
+      <br />
       <table id="table-action-{{$action}}" class="table table-dark table-sm table-hover action-table">
         <thead class="">
           <tr>
@@ -152,18 +194,10 @@ $validation = function($col)
           <h5>Response</h5>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-3">
-          <label>Business operation</label>
-          <select name="actions[{{$action}}][business][operation]" class="form-control">
-            <option value="find">{{$config['entity']}}::find</option>
-            <option value="paginate">{{$config['entity']}}::paginate</option>
-            <option value="collection">Collection {{$config['entity']}}</option>
-            <option value="create">{{$config['entity']}}::create</option>
-            <option value="save">{{$config['entity']}}->save()</option>
-            <option value="delete">{{$config['entity']}}->delete()</option>
-          </select>
-        </div>
+
+
+      <div class="row" style="display: none">
+
 
         <div class="col-md-2">
           <label>Business Success</label>
@@ -171,7 +205,7 @@ $validation = function($col)
             <option value="200">200 Status Code</option>
             <option value="201">201 Status Code</option>
           </select>
-        </div>  
+        </div>
 
         <div class="col-md-2">
           <label>Business Exception</label>
@@ -179,7 +213,7 @@ $validation = function($col)
             <option value="400">400 Status Code</option>
             <option value="422">422 Status Code</option>
           </select>
-        </div>  
+        </div>
 
         <div class="col-md-2">
           <label>Validate Exception</label>
@@ -187,18 +221,18 @@ $validation = function($col)
             <option value="422">422 Status Code</option>
             <option value="400">400 Status Code</option>
           </select>
-        </div>  
+        </div>
 
         <div class="col-md-2">
           <label>Type</label>
           <select name="actions[{{$action}}][response][type]" class="form-control">
             <option value="json">Json</option>
           </select>
-        </div>  
+        </div>
 
       </div>
     </div>
   </div>
 
   </div>
-</div> 
+</div>

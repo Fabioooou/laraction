@@ -1,0 +1,49 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Action;
+{{businessOperationUses}}
+/**
+ *  {{class}}
+ * ------
+ *
+ *  @description Use case from context:
+ *
+ **/
+class {{class}} extends Action
+{
+
+    /**
+     * run
+     * ----
+     * return {{businessOperationType}}
+     **/
+    public function run(): {{businessOperationType}}
+    {
+        return $this->validate()
+                    ->{{businessMethod}}();
+    }
+
+    /**
+     * validate
+     * ----
+     * return self
+     **/
+    protected function validate(): self
+    {
+        $this->request()->validate({{validateRules}}, {{validateMessages}});
+
+        return $this;
+    }
+
+    /**
+     * {{businessMethod}}
+     * -----
+     **/
+    protected function {{businessMethod}}(): {{businessOperationType}}
+    {
+    {{businessOperationScript}}
+    }
+
+}

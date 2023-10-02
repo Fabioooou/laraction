@@ -1,0 +1,32 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Action;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+
+/**
+ *  {{class}}
+ * ------
+ *
+ *  @description paginate {{model}}
+ *
+ **/
+class {{class}} extends Action
+{
+    public ?Paginator ${{entity}};
+
+    /**
+     * run
+     * ----
+     * return Paginator
+     **/
+    public function run(): ?Paginator
+    {
+{{scriptPaginate}}
+    }
+
+
+
+
+}

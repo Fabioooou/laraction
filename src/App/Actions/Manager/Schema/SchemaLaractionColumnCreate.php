@@ -51,7 +51,7 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of name
-	 */ 
+	 */
 	public function getName() : string
 	{
 		return $this->name;
@@ -59,7 +59,7 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of type
-	 */ 
+	 */
 	public function getType() : string
 	{
 		return $this->type;
@@ -67,7 +67,7 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of notnull
-	 */ 
+	 */
 	public function getNotnull() : string
 	{
 		return $this->notnull;
@@ -75,7 +75,7 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of default
-	 */ 
+	 */
 	public function getDefault() : string
 	{
 		return $this->default;
@@ -83,15 +83,20 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of validate
-	 */ 
+	 */
 	public function getValidate() : string
 	{
 		return $this->validate;
 	}
 
+    public function getRequired() : string
+    {
+        return (str_contains($this->validate, 'required')) ? 'required' : '';
+    }
+
 	/**
 	 * Get the value of origin
-	 */ 
+	 */
 	public function getOrigin() : string
 	{
 		return $this->origin;
@@ -99,7 +104,7 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of autoincrement
-	 */ 
+	 */
 	public function getAutoincrement()
 	{
 		return $this->autoincrement;
@@ -107,7 +112,7 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of length
-	 */ 
+	 */
 	public function getLength()
 	{
 		return $this->length;
@@ -115,7 +120,7 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of scale
-	 */ 
+	 */
 	public function getScale()
 	{
 		return $this->scale;
@@ -123,7 +128,7 @@ class SchemaLaractionColumnCreate extends Action
 
 	/**
 	 * Get the value of precision
-	 */ 
+	 */
 	public function getPrecision()
 	{
 		return $this->precision;

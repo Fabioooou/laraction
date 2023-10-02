@@ -1,0 +1,52 @@
+<?php
+
+namespace {{namespace}};
+
+use Laraction\Action;
+use Laraction\Exceptions\BusinessException;
+
+/**
+ *  {{class}}
+ * ------
+ *
+ *  @description create {{model}} entity
+ *
+ **/
+class {{class}} extends Action
+{
+
+    protected ?{{model}} ${{entity}};
+
+    /**
+     * run
+     * ----
+     * @return {{model}}
+     **/
+    public function run(): ?{{model}}
+    {
+        return $this->validate()
+                    ->create();
+    }
+
+    /**
+     * validate
+     * ----
+     * @return self
+     **/
+    protected function validate(): self
+    {
+    {{scriptValidate}}
+
+        return $this;
+    }
+
+    /**
+     * create
+     * -----
+     **/
+    protected function create(): ?{{model}}
+    {
+    {{scriptCreate}}
+    }
+
+}

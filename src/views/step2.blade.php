@@ -1,13 +1,13 @@
 @extends('laraction::layout.app')
 @section('content')
-<form id="frmSubSystem" action="/laraction/step3/{{$config['route']}}" method="POST">
+<form id="frmSubSystem" action="/laraction/step3/{{$config->getRoute()}}" method="POST">
 @csrf
 <div class="content-header">
 	<div class="container">
 			<div class="row">
 				<div class="col-md-10">
-					<h2>{{$config['route']}}
-						<small>{{$config['dir']}}</small>
+					<h2>{{$config->getRoute()}}
+						<small>{{implode('/', $config->getCapitalizePath())}}</small>
 					</h2>
 				</div>
 				<div class="col-md-2 text-right">
@@ -31,7 +31,7 @@
 		<div class="row">
 
 				<div id="action-news"></div>
-		</div>	
+		</div>
 </div>
 
 <div class="container">
@@ -61,7 +61,7 @@
 	}
 	.action-col{
 		padding-top: 10px;
-		
+
 	}
 	.action-details{ display: none}
 	.action-details .form-control{
@@ -85,6 +85,10 @@
 	.action-delete{
 		color: #eb4c4c
 	}
+    .use-case-box{
+        padding-bottom:15px;
+
+    }
 
 </style>
 @endsection
@@ -134,6 +138,36 @@ $(function(){
 		$action_item.find('.action-name-method').html($(this).val());
 	});
 
+    $(document).on('change', '.operation-method', function()
+	{
+        $operation = $(this).val();
+        $action_method = $(this).parent().parent().parent().parent().find('.action-method');
+        $route_params = $(this).parent().parent().parent().parent().find('.route-params');
+
+        if($operation == 'create' || $operation == 'save'){
+            $action_method.val('post');
+        }else{
+            $action_method.val('get');
+        }
+        $action_method.trigger('change');
+
+        if($operation == 'save' || $operation == 'save_form' || $operation == 'delete'){
+            $route_params.val('id');
+        }else{
+            $route_params.val('');
+        }
+
+    });
+
+	$(document).on('change', '.action-apptype', function()
+	{
+        /**
+		$action_item = $(this).parent().parent().parent().parent().parent();
+		$action_item.find('.action-name-method').removeClass('action-get').removeClass('action-post').removeClass('action-put').removeClass('action-delete').addClass('action-'+$(this).val());
+		$action_item.find('.action-name-method').html($(this).val());
+        **/
+	});
+
 
 	$(document).on('click', '#newField', function()
 	{
@@ -171,16 +205,16 @@ $(function(){
 		if(action == 'Example'){
 			action = action +''+ $('.action-name').length;
 		}
-		$.post('/laraction/action/{{$config['route']}}/'+action, {}, function(data){
+		$.post('/laraction/action/{{$config->getRoute()}}/'+action, {}, function(data){
 			$('#action-news').before(data);
 			$('.action-name:last').focus();
 
-			new Sortable(document.getElementById('tbody-action-'+action), 
+			new Sortable(document.getElementById('tbody-action-'+action),
 			{
 				animation: 150,
 				draggable: ".drag",
 				handle: '.handle',
-			}); 
+			});
 
 		});
 	}
